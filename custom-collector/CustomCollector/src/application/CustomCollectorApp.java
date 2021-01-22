@@ -1,5 +1,6 @@
 package application;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -45,16 +46,17 @@ public class CustomCollectorApp {
 		
 		ArrayList<Map.Entry<String,Integer>> mostRatedStudents = 
 				rates.entrySet().stream().collect(Collector.of(
-					() -> new ArrayList<Map.Entry<String,Integer>>(),   // supplier
+					() -> {
+						ArrayList<Map.Entry<String,Integer>> supp = new ArrayList<>();
+						supp.add(new AbstractMap.SimpleEntry<String,Integer>("nobody", -1));
+						return supp;
+					},
 					(acc, e) -> {										// accumulator
-						if(acc.size() == 0) acc.add(e);
-						else{
-							int currentValue = acc.get(0).getValue();
-							int entryValue = e.getValue();
-							if (currentValue <= entryValue) {
-								if (currentValue < entryValue)acc.clear();
-								acc.add(e);
-							}
+						int currentValue = acc.get(0).getValue();
+						int entryValue = e.getValue();
+						if (currentValue <= entryValue) {
+							if (currentValue < entryValue)acc.clear();
+							acc.add(e);
 						}
 					}, 
 					(a1, a2) -> {a1.addAll(a2); return a1;} 			// combiner
