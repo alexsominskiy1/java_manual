@@ -1,0 +1,4 @@
+{id: 1234567890111, name: Sasha, birthday: 1958-02-21, accessCode: 3, privateCode :  55, group: S, age: 62, weight:  78.3, height: 176.3, married: true}
+{group: T, age: 22, weight:  58.3, height: 166.3, married: false, id: 1234567890222, name: Masha, birthday: 1998-02-21, accessCode: 4, privateCode :  49}
+{id: 1234567x890333, name: Glasha, birthday: 1988-02-21, accessCode: 5, privateCode :  38, group: U, age: 32, weight:  68.3, height: 166.3, married: true}
+{id: 1234567890444, name: Natasha, birthday: 2008-02-21, accessCode: 6, privateCode :  13, group: V, Age: 12, weight:  38.3, height: 146.3, married: false}
