@@ -17,6 +17,6 @@ import validators.ValidatorAnnotation;
                      valueType = LocalDate.class)
 public @interface MonthForbidden {
 	
-	Month month();
-	String message() default "Born at ";
+	public Month month();
+	public String message() default "Born at ";
 }

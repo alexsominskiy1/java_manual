@@ -12,6 +12,6 @@ import validators.ValidatorAnnotation;
 @Target(FIELD)
 @ValidatorAnnotation(valueType = String.class)
 public @interface PatternString {
-	String pattern();
-	String message() default "String must be not null and match pattern ";
+	public String pattern();
+	public String message() default "String must be not null and match pattern ";
 }

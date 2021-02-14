@@ -13,7 +13,8 @@ import validators.ValidatorAnnotation;
 @Target(FIELD)
 @ValidatorAnnotation(valueType = LocalDate.class)
 public @interface LocalDateRange {
-	String from();
-	String to();
-	String message() default  "Value must be not null and in range ";
+	
+	public String from();
+	public String to();
+	public String message() default  "Value must be not null and in range ";
 }

@@ -12,8 +12,9 @@ import validators.ValidatorAnnotation;
 @Target(FIELD)
 @ValidatorAnnotation(valueType = double.class)
 public @interface DoubleRange {
-	double min();
-	double max();
 	
-	String message() default "Value must be in range ";
+	public double min();
+	public double max();
+	
+	public String message() default "Value must be in range ";
 }
