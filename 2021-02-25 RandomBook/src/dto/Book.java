@@ -17,11 +17,11 @@ public class Book implements Comparable<Book>{
 			                                   (book1, book2) -> book1.isPictures() == book2.isPictures() ? 0 : book1.isPictures() ? 1 : -1;
 	public static Comparator<Book> priceComparator = (book1, book2) -> Double.compare(book1.getPrice(), book2.getPrice());
 	
-	public static Comparator<Book> defaultComparator = authorsComparator/*
+	public static Comparator<Book> defaultComparator = authorsComparator
 									    .thenComparing(titleComparator)
 									    .thenComparing(publishingDateComparator)
 									    .thenComparing(priceComparator)
-									    .thenComparing(picturesComparator)*/;
+									    .thenComparing(picturesComparator);
 													 
 	
 	private long isbn;     			// 13 digits
