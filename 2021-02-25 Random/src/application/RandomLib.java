@@ -30,8 +30,8 @@ public class RandomLib {
 	}
 	
 	public static String randomStringOfArray(String[] arr) {
-		int arrLength = arr.length;
-		
+		int arrLength = arr.length;		
+
 		if (arrLength == 0) throw new RandomLibException("randomStringOfArray: Empty array");
 		
 		return arr[ThreadLocalRandom.current().nextInt(arrLength)];
@@ -39,6 +39,5 @@ public class RandomLib {
 	
 	public static boolean randomBoolean(double trueProbability) {
 		return ThreadLocalRandom.current().nextDouble() < trueProbability;
-	}
-	
+	}	
 }
