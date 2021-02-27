@@ -1,7 +1,5 @@
 package application;
 
-import java.time.LocalDate;
-
 import dto.Car;
 
 public class RandomCarTestApp {
