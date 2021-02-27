@@ -1,7 +1,6 @@
 package application;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomLib {
@@ -14,8 +13,9 @@ public class RandomLib {
 	}
 	
 	public static LocalDate randomLocalDate(LocalDate start, LocalDate end) {
-		if (end.isAfter(start)) throw new RandomLibException(
-				"randomLocalDate: End not after start. start: " + start + "; end: " + end);
+		if (!start.isBefore(end)) throw new RandomLibException(
+				"randomLocalDate: Start not after end. start: " + start + "; end: " + end
+															);
 		return start.plusDays(ThreadLocalRandom.current().nextLong(end.toEpochDay() - start.toEpochDay()));
 	}
 	
@@ -29,8 +29,8 @@ public class RandomLib {
 	}
 	
 	public static String randomStringOfArray(String[] arr) {
-		int arrLength = arr.length;		
-
+		int arrLength = arr.length;
+		
 		if (arrLength == 0) throw new RandomLibException("randomStringOfArray: Empty array");
 		
 		return arr[ThreadLocalRandom.current().nextInt(arrLength)];
@@ -38,5 +38,6 @@ public class RandomLib {
 	
 	public static boolean randomBoolean(double trueProbability) {
 		return ThreadLocalRandom.current().nextDouble() < trueProbability;
-	}	
+	}
+	
 }
