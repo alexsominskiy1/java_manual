@@ -34,8 +34,7 @@ public class Reciever extends Thread {
 			
 			try {
 				sleep(delay);									// processing imitation
-			} catch (InterruptedException e) {/* nop */}
-			
+			} catch (InterruptedException e) {/* nop */}	
 		}
 	}
 }
