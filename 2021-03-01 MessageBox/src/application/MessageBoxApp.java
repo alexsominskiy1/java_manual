@@ -40,8 +40,6 @@ public class MessageBoxApp {
 		
 		messagesList.get().stream().forEach(System.out::println);
 		long maxDelay = messagesList.get().stream().mapToLong(Message::getDelay).max().getAsLong();
-		System.out.println("max delay: " + maxDelay);
-		
+		System.out.println("max delay: " + maxDelay);	
 	}
-
 }
