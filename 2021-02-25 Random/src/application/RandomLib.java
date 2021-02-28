@@ -14,7 +14,7 @@ public class RandomLib {
 	
 	public static LocalDate randomLocalDate(LocalDate start, LocalDate end) {
 		if (!start.isBefore(end)) throw new RandomLibException(
-				"randomLocalDate: Start not after end. start: " + start + "; end: " + end
+				"randomLocalDate: Start not before end. start: " + start + "; end: " + end
 															);
 		return start.plusDays(ThreadLocalRandom.current().nextLong(end.toEpochDay() - start.toEpochDay()));
 	}
