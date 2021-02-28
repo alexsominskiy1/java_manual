@@ -58,5 +58,4 @@ public class LinkedListMessageBox implements MessageBox{
 			lock.unlock();
 		}
 	}
-
 }
