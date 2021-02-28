@@ -20,7 +20,7 @@ public class MessageBoxApp {
 		
 		MessageBox messageBox = new LinkedListMessageBox(MESSAGE_BOX_SIZE);
 		MessagesCollection messagesList = new MessagesArrayList();
-		 
+		
 		Reciever[] recievers = new Reciever[NUM_RECIEVERS];
 		for (int i = 0; i < recievers.length; i++) {
 			recievers[i] = new Reciever("Reciever #"+i, messageBox, RECIEVER_DELAY, messagesList);
