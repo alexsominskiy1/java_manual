@@ -34,8 +34,7 @@ public class MessageBoxApp {
 			Thread.sleep(SENDER_DELAY);	
 		}
 		
-		for (int i=0; i < senders.length; i++)senders[i].join();
-		
+		for (int i=0; i < senders.length; i++)senders[i].join();		
 		Thread.sleep(2*MESSAGE_BOX_SIZE*RECIEVER_DELAY);
 		
 		messagesList.get().stream().forEach(System.out::println);
