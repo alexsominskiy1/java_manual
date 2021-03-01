@@ -1,11 +1,12 @@
-package messagebox;
+package implementations;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import implementations.Message;
+import messagebox.Reciever;
+import messagebox.Sender;
 
 public class CreatorsAndProcessors {
 	
