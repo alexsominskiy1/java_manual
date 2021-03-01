@@ -1,4 +1,4 @@
-package messagebox;
+package implementations;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -61,8 +61,4 @@ public class Message {
 			 "; reciever: " + recieverName + ", recieved: " + dtf.format(recieved) + 
              "; delay: " + delay + "ms";
 	}
-	
-	
-	
-	
 }

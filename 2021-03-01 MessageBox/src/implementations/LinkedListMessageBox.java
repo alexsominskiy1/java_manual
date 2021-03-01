@@ -1,14 +1,16 @@
-package messagebox;
+package implementations;
 
 import java.util.LinkedList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class LinkedListMessageBox implements MessageBox{
+import messagebox.MessageBox;
+
+public class LinkedListMessageBox<T> implements MessageBox<T>{
 	
 	private static final int DEFAULT_MESSAGE_BOX_SIZE = 5;
 	
-	private LinkedList<Message> messageBox = new LinkedList<>();
+	private LinkedList<T> messageBox = new LinkedList<>();
 	private int messageBoxSize = DEFAULT_MESSAGE_BOX_SIZE;
 	
 	private ReentrantLock lock = new ReentrantLock();
@@ -24,7 +26,8 @@ public class LinkedListMessageBox implements MessageBox{
 		this.messageBoxSize = messageBoxSize;
 	}
 
-	public void put(Message message) {
+	@Override
+	public void put(T message) {
 		try {
 			lock.lock();
 			while (messageBox.size() == messageBoxSize) {
@@ -41,7 +44,8 @@ public class LinkedListMessageBox implements MessageBox{
 		}
 	}
 
-	public Message take() {
+	@Override
+	public T take() {
 		try {
 			lock.lock();
 			while (messageBox.size() == 0) {
@@ -51,7 +55,7 @@ public class LinkedListMessageBox implements MessageBox{
 					System.out.println(Thread.currentThread() + "thread was interrupted");
 				}
 			}
-			Message message = messageBox.pollFirst();
+			T message = messageBox.pollFirst();
 			sendersNotificationCondition.signal();
 			return message;
 		} finally {

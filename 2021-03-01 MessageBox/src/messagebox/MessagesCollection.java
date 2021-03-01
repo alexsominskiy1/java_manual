@@ -2,8 +2,8 @@ package messagebox;
 
 import java.util.Collection;
 
-public interface MessagesCollection {
+public interface MessagesCollection<T> {
 	
-	public void put(Message message);
-	public Collection<Message> get();
+	public void put(T message);
+	public Collection<T> get();
 }
