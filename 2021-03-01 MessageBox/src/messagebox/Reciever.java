@@ -16,7 +16,7 @@ public class Reciever<T> extends Thread {
 		this.messageBox = messageBox;
 		this.messageProcessor = messageProcessor;
 		this.messagesCollection = messagesCollection;
-		setDaemon(true);
+		setDaemon(true);                                     // optional to let the application finish
 	}
 
 	public String getRecieverName() {
