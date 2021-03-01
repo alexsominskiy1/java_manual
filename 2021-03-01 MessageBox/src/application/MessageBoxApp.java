@@ -1,5 +1,6 @@
 package application;
 
+import messagebox.CreatorsAndProcessors;
 import messagebox.MessageBox;
 
 import java.time.Duration;
@@ -7,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import implementations.CreatorsAndProcessors;
 import implementations.LinkedListMessageBox;
 import implementations.Message;
 import implementations.MessagesArrayList;
