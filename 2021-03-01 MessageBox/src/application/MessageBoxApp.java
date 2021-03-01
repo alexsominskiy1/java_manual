@@ -65,7 +65,7 @@ public class MessageBoxApp {
 		}
 		
 		for (int i=0; i < senders.length; i++)senders[i].join();		
-		Thread.sleep(2*MESSAGE_BOX_SIZE*RECIEVER_DELAY);
+		Thread.sleep(2*MESSAGE_BOX_SIZE*RECIEVER_DELAY + 1000);
 		
 		System.out.println("messages processed: " + messagesCollection.get().size());
 		messagesCollection.get().stream().forEach(System.out::println);
