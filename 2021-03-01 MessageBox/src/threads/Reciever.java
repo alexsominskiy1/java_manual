@@ -29,7 +29,7 @@ public class Reciever extends Thread {
 			LocalDateTime recieved = LocalDateTime.now();
 			message.setRecieverName(recieverName);
 			message.setRecieved(recieved);
-			message.setDelay(Duration.between(message.getSent(), recieved).toMillis());
+			message.setDelay(Duration.between(message.getSent(), recieved).toMillis() + delay);
 			messagesList.put(message);
 			
 			try {
