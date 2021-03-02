@@ -23,7 +23,7 @@ public class LinkedListMessageBox<T> implements MessageBox<T>{
 
 	public LinkedListMessageBox(int messageBoxSize) {
 		super();
-		this.messageBoxSize = messageBoxSize;
+		this.messageBoxSize = messageBoxSize > 0 ? messageBoxSize : DEFAULT_MESSAGE_BOX_SIZE;
 	}
 
 	@Override
