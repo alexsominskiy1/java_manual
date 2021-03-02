@@ -9,8 +9,8 @@ public class Message {
 	
 	private String senderName;
 	private LocalDateTime sent;
-	private String recieverName;
-	private LocalDateTime recieved;
+	private String receiverName;
+	private LocalDateTime received;
 	private long delay;
 	
 	public Message() {}
@@ -31,20 +31,20 @@ public class Message {
 		this.sent = sent;
 	}
 
-	public String getRecieverName() {
-		return recieverName;
+	public String getReceiverName() {
+		return receiverName;
 	}
 
-	public void setRecieverName(String recieverName) {
-		this.recieverName = recieverName;
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
 	}
 
 	public LocalDateTime getRecieved() {
-		return recieved;
+		return received;
 	}
 
-	public void setRecieved(LocalDateTime recieved) {
-		this.recieved = recieved;
+	public void setReceived(LocalDateTime received) {
+		this.received = received;
 	}
 
 	public long getDelay() {
@@ -58,7 +58,7 @@ public class Message {
 	@Override
 	public String toString() {
 		return "sender: " + senderName + "; sent: " + dtf.format(sent) + 
-			 "; reciever: " + recieverName + ", recieved: " + dtf.format(recieved) + 
+			 "; receiver: " + receiverName + ", received: " + dtf.format(received) + 
              "; delay: " + delay + "ms";
 	}
 }

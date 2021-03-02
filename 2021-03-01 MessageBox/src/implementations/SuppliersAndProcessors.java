@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import messagebox.Reciever;
+import messagebox.Receiver;
 import messagebox.Sender;
 
 public class SuppliersAndProcessors {
@@ -19,12 +19,12 @@ public class SuppliersAndProcessors {
 		};
 	}
 	
-	public static BiFunction<Message, Reciever<Message>, Message> messageProcessor(long delay){
-		return (message, reciever) -> {
-			LocalDateTime recieved = LocalDateTime.now();
-			message.setRecieverName(reciever.getRecieverName());
-			message.setRecieved(recieved);
-			message.setDelay(Duration.between(message.getSent(), recieved).toMillis() + delay);
+	public static BiFunction<Message, Receiver<Message>, Message> messageProcessor(long delay){
+		return (message, receiver) -> {
+			LocalDateTime received = LocalDateTime.now();
+			message.setReceiverName(receiver.getRecieverName());
+			message.setReceived(received);
+			message.setDelay(Duration.between(message.getSent(), received).toMillis() + delay);
 			
 			try {
 				Thread.sleep(delay);									// processing imitation

@@ -2,17 +2,17 @@ package messagebox;
 
 import java.util.function.BiFunction;
 
-public class Reciever<T> extends Thread {
+public class Receiver<T> extends Thread {
 	
-	private String recieverName;
+	private String receiverName;
 	private MessageBox<T> messageBox;
-	private BiFunction<T, Reciever<T>, T> messageProcessor;
+	private BiFunction<T, Receiver<T>, T> messageProcessor;
 	private MessagesCollection<T> messagesCollection;
 	
-	public Reciever(String recieverName, MessageBox<T> messageBox, BiFunction<T,Reciever<T>, T> messageProcessor, 
+	public Receiver(String receiverName, MessageBox<T> messageBox, BiFunction<T,Receiver<T>, T> messageProcessor, 
 			        MessagesCollection<T> messagesCollection) {
 		super();
-		this.recieverName = recieverName;
+		this.receiverName = receiverName;
 		this.messageBox = messageBox;
 		this.messageProcessor = messageProcessor;
 		this.messagesCollection = messagesCollection;
@@ -20,7 +20,7 @@ public class Reciever<T> extends Thread {
 	}
 
 	public String getRecieverName() {
-		return recieverName;
+		return receiverName;
 	}
 
 	@Override
