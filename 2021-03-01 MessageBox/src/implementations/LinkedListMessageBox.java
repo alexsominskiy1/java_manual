@@ -33,9 +33,7 @@ public class LinkedListMessageBox<T> implements MessageBox<T>{
 			while (messageBox.size() == messageBoxSize) {
 				try {
 					sendersNotificationCondition.await();
-				} catch (InterruptedException e) {
-					System.out.println(Thread.currentThread() + ": thread was interrupted");
-				}
+				} catch (InterruptedException e) {/* nop */}
 			}
 			messageBox.addLast(message);
 			receiversNotificationCondition.signal();
@@ -51,9 +49,7 @@ public class LinkedListMessageBox<T> implements MessageBox<T>{
 			while (messageBox.size() == 0) {
 				try {
 					receiversNotificationCondition.await();
-				} catch (InterruptedException e) {
-					System.out.println(Thread.currentThread() + "thread was interrupted");
-				}
+				} catch (InterruptedException e) {/* nop */}
 			}
 			T message = messageBox.pollFirst();
 			sendersNotificationCondition.signal();

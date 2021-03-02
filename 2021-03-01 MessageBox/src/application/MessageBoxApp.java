@@ -2,15 +2,10 @@ package application;
 
 import messagebox.MessageBox;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-
-import implementations.CreatorsAndProcessors;
 import implementations.LinkedListMessageBox;
 import implementations.Message;
 import implementations.MessagesArrayList;
+import implementations.SuppliersAndProcessors;
 import messagebox.MessagesCollection;
 import messagebox.Reciever;
 import messagebox.Sender;
@@ -31,14 +26,14 @@ public class MessageBoxApp {
 		Reciever<Message>[] recievers = new Reciever[NUM_RECIEVERS];
 		for (int i = 0; i < recievers.length; i++) {
 			recievers[i] = new Reciever<Message>("Reciever #"+i, messageBox, 
-					                             CreatorsAndProcessors.messageProcessor(RECIEVER_DELAY), 
+					                             SuppliersAndProcessors.messageProcessor(RECIEVER_DELAY), 
 					                             messagesCollection);
 		}
 		for (int i = 0; i < recievers.length; i++) recievers[i].start();
 		
 		Sender<Message>[] senders = new Sender[NUM_MESSAGES];
 		for (int i=0; i < senders.length; i++) {
-			senders[i] = new Sender<Message>("Sender #"+i, messageBox, CreatorsAndProcessors.messageCreator());
+			senders[i] = new Sender<Message>("Sender #"+i, messageBox, SuppliersAndProcessors.messageCreator());
 			senders[i].start();
 			Thread.sleep(SENDER_DELAY);	
 		}

@@ -8,7 +8,7 @@ import java.util.function.Function;
 import messagebox.Reciever;
 import messagebox.Sender;
 
-public class CreatorsAndProcessors {
+public class SuppliersAndProcessors {
 	
 	public static Function<Sender<Message>, Message> messageCreator(){
 		return sender -> {
