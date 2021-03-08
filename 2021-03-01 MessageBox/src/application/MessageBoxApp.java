@@ -33,7 +33,7 @@ public class MessageBoxApp {
 		
 		Sender<Message>[] senders = new Sender[NUM_MESSAGES];
 		for (int i=0; i < senders.length; i++) {
-			senders[i] = new Sender<Message>("Sender #"+i, messageBox, SuppliersAndProcessors.messageCreator());
+			senders[i] = new Sender<Message>("Sender #"+i, messageBox, SuppliersAndProcessors.messageCreator);
 			senders[i].start();
 			Thread.sleep(SENDER_DELAY);	
 		}
