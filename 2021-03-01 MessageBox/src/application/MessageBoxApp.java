@@ -26,14 +26,14 @@ public class MessageBoxApp {
 		Receiver<Message>[] receivers = new Receiver[NUM_RECEIVERS];
 		for (int i = 0; i < receivers.length; i++) {
 			receivers[i] = new Receiver<Message>("Receiver #"+i, messageBox, 
-					                             SuppliersAndProcessors.messageProcessor(RECEIVER_DELAY), 
+					                             SuppliersAndProcessors.getMessageProcessor(RECEIVER_DELAY), 
 					                             messagesCollection);
 		}
 		for (int i = 0; i < receivers.length; i++) receivers[i].start();
 		
 		Sender<Message>[] senders = new Sender[NUM_MESSAGES];
 		for (int i=0; i < senders.length; i++) {
-			senders[i] = new Sender<Message>("Sender #"+i, messageBox, SuppliersAndProcessors.messageCreator);
+			senders[i] = new Sender<Message>("Sender #"+i, messageBox, SuppliersAndProcessors.getMessageSupplier());
 			senders[i].start();
 			Thread.sleep(SENDER_DELAY);	
 		}

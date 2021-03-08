@@ -10,14 +10,16 @@ import messagebox.Sender;
 
 public class SuppliersAndProcessors {
 	
-	public static Function<Sender<Message>, Message> messageCreator = sender -> {
+	public static Function<Sender<Message>, Message> getMessageSupplier(){
+		return sender -> {
 			Message message = new Message();
 			message.setSenderName(sender.getSenderName());
 			message.setSent(LocalDateTime.now());
 			return message;
-	};
+		};
+	}
 	
-	public static BiFunction<Message, Receiver<Message>, Message> messageProcessor(long delay){
+	public static BiFunction<Message, Receiver<Message>, Message> getMessageProcessor(long delay){
 		return (message, receiver) -> {
 			LocalDateTime received = LocalDateTime.now();
 			message.setReceiverName(receiver.getRecieverName());
@@ -31,8 +33,5 @@ public class SuppliersAndProcessors {
 			return message;
 		};
 	}
-
 	
-
-
 }
