@@ -21,5 +21,5 @@ public class BalanceTest {
 		System.out.println("\nBalanced:");
 		System.out.println("height: " + balanced.height());
 		System.out.println("size: " + balanced.size());
-			}
+	}
 }
