@@ -9,7 +9,7 @@ public class AddRemoveTest {
 
 	public static void main(String[] args) {
 		
-		TreeSetRecursiveUnbalanced<Integer> tree = new TreeSetRecursiveUnbalanced<>();
+		TreeSetUnbalanced<Integer> tree = new TreeSetUnbalanced<>();
 		
 		ArrayList<Integer> toRemove = new ArrayList<>();
 		int element = 0;
