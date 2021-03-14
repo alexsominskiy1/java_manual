@@ -18,17 +18,7 @@ public class TreeSetRecursiveUnbalanced<T> implements Iterable<T>{
 		Node(T data){this.data = data;}
 	}
 
-	// Exceptions
-
-	@SuppressWarnings("serial")
-	private static class DuplicateDataTreeSetException extends RuntimeException{}
-	@SuppressWarnings("serial")
-	private static class ElementNotFoundTreeSetException extends RuntimeException{}
-	@SuppressWarnings("serial")
-	private static class TypeNotComparableTreeSetException extends RuntimeException{}
-	@SuppressWarnings("serial")
-	private static class IterationFailedTreeSetException extends RuntimeException{}
-
+	
 	// data members
 
 	private Node root = null;
@@ -49,13 +39,17 @@ public class TreeSetRecursiveUnbalanced<T> implements Iterable<T>{
 	public TreeSetRecursiveUnbalanced(Comparator<T> comparator) {
 		this.comparator = comparator;
 	}
-
-	// utils
 	
-	private Node getLeftmost(Node node) {
-		while(node.left != null) node = node.left;
-		return node;
-	}
+	// Exceptions
+
+	@SuppressWarnings("serial")
+	private static class DuplicateDataTreeSetException extends RuntimeException{}
+	@SuppressWarnings("serial")
+	private static class ElementNotFoundTreeSetException extends RuntimeException{}
+	@SuppressWarnings("serial")
+	private static class TypeNotComparableTreeSetException extends RuntimeException{}
+	@SuppressWarnings("serial")
+	private static class IterationFailedTreeSetException extends RuntimeException{}
 		
 	// and and remove
 
@@ -124,7 +118,11 @@ public class TreeSetRecursiveUnbalanced<T> implements Iterable<T>{
 		}
 		
 		return tmp;
-
+	}
+	
+	private Node getLeftmost(Node node) {
+		while(node.left != null) node = node.left;
+		return node;
 	}
 
 	// contains
