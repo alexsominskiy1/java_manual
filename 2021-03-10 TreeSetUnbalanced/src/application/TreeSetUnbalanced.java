@@ -7,18 +7,15 @@ import java.util.NoSuchElementException;
 
 public class TreeSetUnbalanced<T> implements Iterable<T>{
 
-	// Node
-
-	private class Node{
+	private class Node {
 
 		T data;
 		Node left;
-		Node right ;
+		Node right;
 
 		Node(T data){this.data = data;}
 	}
 
-	
 	// data members
 
 	private Node root = null;
@@ -205,14 +202,14 @@ public class TreeSetUnbalanced<T> implements Iterable<T>{
 	}
 	
 	// balance
-	
+
 	public TreeSetUnbalanced<T> balance(){
-		
+
 		ArrayList<T> alt = new ArrayList<>();
 		for(T element : this) alt.add(element);
-		
+
 		TreeSetUnbalanced<T> balanced = new TreeSetUnbalanced<>(comparator);
-		
+
 		putArrayToTree(balanced, alt, 0, alt.size()-1);
 		return balanced;
 	}
@@ -223,7 +220,7 @@ public class TreeSetUnbalanced<T> implements Iterable<T>{
 			balanced.add(alt.get(start));
 			return;
 		}
-		
+
 		int index = start + (end - start)/2;
 		balanced.add(alt.get(index));
 		putArrayToTree(balanced, alt, start, index-1);
