@@ -4,8 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class BalanceTest {
 
-	private static final int NUM_ELEMENTS = 4;
-
+	private static final int NUM_ELEMENTS = 10000000;
 	public static void main(String[] args) {
 
 		TreeSetUnbalanced<Integer> unbalanced = new TreeSetUnbalanced<>();
