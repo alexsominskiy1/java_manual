@@ -133,8 +133,10 @@ public class TreeSetUnbalanced<T> implements Iterable<T>{
 
 	private boolean subTreeContains(Node rootNode, T data) {
 		if (rootNode == null) return false;
-		if (comparator.compare(data, rootNode.data) > 0) return subTreeContains(rootNode.right, data);
-		else if (comparator.compare(data, rootNode.data) < 0) return subTreeContains(rootNode.left, data);
+		
+		int comparision = comparator.compare(data, rootNode.data);
+		if (comparision > 0) return subTreeContains(rootNode.right, data);
+		else if (comparision < 0) return subTreeContains(rootNode.left, data);
 		else return true;
 	}
 
