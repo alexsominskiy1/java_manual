@@ -218,13 +218,13 @@ public class TreeSetUnbalanced<T> implements Iterable<T>{
 	}
 
 	private void putArrayToTree(TreeSetUnbalanced<T> balanced, ArrayList<T> alt, int start, int end) {
-		if (end + start < 0) return;
+		if (end - start < 0) return;
 		if (end == start) {
 			balanced.add(alt.get(start));
 			return;
 		}
 		
-		int index = (end-start)/2;
+		int index = start + (end - start)/2;
 		balanced.add(alt.get(index));
 		putArrayToTree(balanced, alt, start, index-1);
 		putArrayToTree(balanced, alt, index+1, end);
