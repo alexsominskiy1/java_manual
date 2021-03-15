@@ -230,7 +230,9 @@ public class TreeSetUnbalanced<T> implements Iterable<T>{
 		putArrayToTree(balanced, alt, index+1, end);
 	}
 
-	public int height() {return subTreeHeight(root);}
+	public int height() {
+		return subTreeHeight(root);
+	}
 
 	private int subTreeHeight(Node node) {
 		return node == null ? 0 : 1 + Math.max(subTreeHeight(node.left), subTreeHeight(node.right));
