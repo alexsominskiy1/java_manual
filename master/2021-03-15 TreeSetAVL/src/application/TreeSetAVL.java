@@ -15,7 +15,7 @@ public class TreeSetAVL<T> implements Iterable<T>{
 		Node left;
 		Node right;
 		
-		int height = 1;
+		byte height = 1;
 
 		Node(T data){this.data = data;}
 	}
@@ -219,8 +219,8 @@ public class TreeSetAVL<T> implements Iterable<T>{
 		BALANCED, LEFT_LEFT, LEFT_RIGHT, RIGHT_LEFT, RIGHT_RIGHT
 	}
 	
-	private int getBalance(Node node) {
-		return node == null ? 0 : getHeight(node.left) - getHeight(node.right);
+	private byte getBalance(Node node) {
+		return (byte) (node == null ? 0 : getHeight(node.left) - getHeight(node.right));
 	}
 	
 	private State getState(Node node) {
@@ -318,13 +318,13 @@ public class TreeSetAVL<T> implements Iterable<T>{
 	
 	// height
 	
-	private int getHeight(Node node) {
+	private byte getHeight(Node node) {
 		return node == null ? 0 : node.height;
 	}
 	
 	private void setHeight(Node node) {
 		 if (node == null) throw new NullNodeHeightTreeSetException();
-		 node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
+		 node.height = (byte) (1 + Math.max(getHeight(node.left), getHeight(node.right)));
 	}
 
 	public int countHeight() {
