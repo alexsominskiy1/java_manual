@@ -19,7 +19,6 @@ public class TreeSetAVL<T> implements Iterable<T>{
 
 		Node(T data){this.data = data;}
 	}
-
 	
 	// data members
 
@@ -233,6 +232,8 @@ public class TreeSetAVL<T> implements Iterable<T>{
 		putArrayToTree(balanced, alt, start, index-1);
 		putArrayToTree(balanced, alt, index+1, end);
 	}
+	
+	// height
 	
 	private void setHeight(Node node) {
 		 if (node == null) throw new NullNodeHeightTreeSetException();
