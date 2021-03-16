@@ -5,7 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class AddRemoveTest {
 
-	private static final int NUM_ELEMENTS = 10;
+	private static final int NUM_ELEMENTS = 10000000;
+	private static final int NUM_ELEMENTS_TO_REMAIN = 1000;
 
 	public static void main(String[] args) {
 		
@@ -14,27 +15,15 @@ public class AddRemoveTest {
 		ArrayList<Integer> toRemove = new ArrayList<>();
 		int element = 0;
 		for (int i = 0; i < NUM_ELEMENTS; i++) {
-			element = ThreadLocalRandom.current().nextInt(100);
-			if(tree.add(element)) {
-				toRemove.add(element);
-				System.out.println(element + " added");
-			}
-			else System.out.println(element +" not added");
+			element = ThreadLocalRandom.current().nextInt();
+			if(tree.add(element)) toRemove.add(element);
 		}
-		
-		System.out.println();
-		for (Integer i : tree)System.out.print(i + " ");
 		
 		System.out.println();		
 		System.out.println("height: " + tree.countHeight());
 		System.out.println("size: " + tree.size());
 		
-		System.out.println();
-		toRemove.add(NUM_ELEMENTS/2, -1);
-		for (Integer i : toRemove) {
-			if(tree.remove(i))System.out.println(i + " removed");
-			else System.out.println(i + " not removed");
-		}
+		for(int i = 0; i < toRemove.size()-NUM_ELEMENTS_TO_REMAIN; i++)tree.remove(toRemove.get(i));
 	
 		System.out.println();
 		System.out.println("height: " + tree.countHeight());

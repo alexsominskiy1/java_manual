@@ -53,10 +53,15 @@ public class TreeSetAVL<T> implements Iterable<T>{
 	private static class IterationFailedTreeSetException extends RuntimeException{}
 	@SuppressWarnings("serial")
 	private static class NullNodeHeightTreeSetException extends RuntimeException{}
+	@SuppressWarnings("serial")
+	private static class BalanceStateTreeSetException extends RuntimeException{}
+	@SuppressWarnings("serial")
+	private static class AVLBalanceFailException extends RuntimeException{}
 		
 	// and and remove
 
 	public boolean add(T data) {
+		//System.out.println("to add: "+data);
 		try {
 			root = subTreeAdd(root, data);
 			size++;
@@ -67,7 +72,6 @@ public class TreeSetAVL<T> implements Iterable<T>{
 	}
 
 	private Node subTreeAdd(Node rootNode, T data) {
-
 		if (rootNode == null) return new Node(data);
 
 		int comparision = comparator.compare(data, rootNode.data);
@@ -75,8 +79,10 @@ public class TreeSetAVL<T> implements Iterable<T>{
 		else if (comparision < 0) rootNode.left = subTreeAdd(rootNode.left, data);
 		else throw new DuplicateDataTreeSetException();
 		
-		return rootNode;
-
+		Node result = balanceNode(rootNode);
+		
+		if (Math.abs(getBalance(result)) > 1) System.out.println("alert");;
+		return result;
 	}
 
 	public boolean remove(T data) {
@@ -120,7 +126,7 @@ public class TreeSetAVL<T> implements Iterable<T>{
 			}
 		}
 		
-		return tmp;
+		return balanceNode(tmp);
 	}
 	
 	private Node getLeftmost(Node node) {
@@ -207,7 +213,84 @@ public class TreeSetAVL<T> implements Iterable<T>{
 
 	}
 	
-	// balance
+	// AVL balance
+	
+	private enum State {
+		BALANCED, LEFT_LEFT, LEFT_RIGHT, RIGHT_LEFT, RIGHT_RIGHT
+	}
+	
+	private int getBalance(Node node) {
+		return node == null ? 0 : getHeight(node.left) - getHeight(node.right);
+	}
+	
+	private State getState(Node node) {
+		if (Math.abs(getBalance(node)) <= 1) return State.BALANCED;
+		
+		else if (getBalance(node) > 1 && getBalance(node.left) >= 0) return State.LEFT_LEFT;
+		else if (getBalance(node) > 1 && getBalance(node.left) < 0) return State.LEFT_RIGHT;
+		else if (getBalance(node) < -1 && getBalance(node.right) >= 0) return State.RIGHT_LEFT;
+		else if (getBalance(node) < -1 && getBalance(node.right) < 0) return State.RIGHT_RIGHT;
+		
+		else throw new BalanceStateTreeSetException();	
+	}
+	
+	private Node rightRotate(Node baseNode) { 
+        Node leftSon = baseNode.left; 
+        Node grandSon = leftSon.right; 
+  
+        // Perform rotation 
+        leftSon.right = baseNode; 
+        baseNode.left = grandSon; 
+  
+        // Update heights 
+        setHeight(baseNode); 
+        setHeight(leftSon); 
+  
+        // Return new baseNode 
+        return leftSon; 
+    }
+	
+	Node leftRotate(Node baseNode) { 
+        Node rightSon = baseNode.right; 
+        Node grandSon = rightSon.left; 
+  
+        // Perform rotation 
+        rightSon.left = baseNode; 
+        baseNode.right = grandSon; 
+  
+        //  Update heights 
+        setHeight(baseNode); 
+        setHeight(rightSon); 
+  
+        // Return new baseNode 
+        return rightSon; 
+    } 
+	
+	private Node balanceNode(Node node) {
+		
+		if (node == null) return null;
+		
+		setHeight(node);
+	
+		State state = getState(node);
+		
+		if (state == State.BALANCED) return node;
+		
+		else if (state == State.LEFT_LEFT)return rightRotate(node);
+		else if (state == State.LEFT_RIGHT) { 
+            node.left = leftRotate(node.left); 
+            return rightRotate(node); 
+        }
+		else if (state == State.RIGHT_LEFT) { 
+            node.right = rightRotate(node.right); 
+            return leftRotate(node); 
+        }
+		else if (state == State.RIGHT_RIGHT)return leftRotate(node);
+     
+		else throw new AVLBalanceFailException();	
+	}
+	
+	// brute force balance
 	
 	public TreeSetAVL<T> bruteForceBalance(){
 		
