@@ -15,7 +15,7 @@ public class BalanceTest {
 		System.out.println("height: " + unbalanced.countHeight());
 		System.out.println("size: " + unbalanced.size());
 
-		TreeSetAVL<Integer> balanced = unbalanced.balance();
+		TreeSetAVL<Integer> balanced = unbalanced.bruteForceBalance();
 				
 		System.out.println("\nBalanced:");
 		System.out.println("height: " + balanced.countHeight());

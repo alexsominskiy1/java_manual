@@ -209,7 +209,7 @@ public class TreeSetAVL<T> implements Iterable<T>{
 	
 	// balance
 	
-	public TreeSetAVL<T> balance(){
+	public TreeSetAVL<T> bruteForceBalance(){
 		
 		ArrayList<T> alt = new ArrayList<>();
 		for(T element : this) alt.add(element);
@@ -235,9 +235,13 @@ public class TreeSetAVL<T> implements Iterable<T>{
 	
 	// height
 	
+	private int getHeight(Node node) {
+		return node == null ? 0 : node.height;
+	}
+	
 	private void setHeight(Node node) {
 		 if (node == null) throw new NullNodeHeightTreeSetException();
-		 node.height = 1 + Math.max(node.left == null ? 0 : node.left.height, node.right == null ? 0 : node.right.height);
+		 node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
 	}
 
 	public int countHeight() {
