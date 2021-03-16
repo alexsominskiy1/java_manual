@@ -234,8 +234,6 @@ public class TreeSetAVL<T> implements Iterable<T>{
 		putArrayToTree(balanced, alt, index+1, end);
 	}
 	
-	// height
-	
 	private void setHeight(Node node) {
 		 if (node == null) throw new NullNodeHeightTreeSetException();
 		 node.height = 1 + Math.max(node.left == null ? 0 : node.left.height, node.right == null ? 0 : node.right.height);
