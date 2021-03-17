@@ -250,7 +250,7 @@ public class TreeSetAVL<T> implements Iterable<T>{
         return leftSon; 
     }
 	
-	Node leftRotate(Node baseNode) { 
+	private Node leftRotate(Node baseNode) { 
         Node rightSon = baseNode.right; 
         Node grandSon = rightSon.left; 
   
@@ -269,12 +269,13 @@ public class TreeSetAVL<T> implements Iterable<T>{
 	private Node balanceNode(Node node) {
 		
 		if (node == null) return null;
-		
-		setHeight(node);
 	
 		State state = getState(node);
 		
-		if (state == State.BALANCED) return node;
+		if (state == State.BALANCED) {
+			setHeight(node);
+			return node;
+		}
 		
 		else if (state == State.LEFT_LEFT)return rightRotate(node);
 		else if (state == State.LEFT_RIGHT) { 
