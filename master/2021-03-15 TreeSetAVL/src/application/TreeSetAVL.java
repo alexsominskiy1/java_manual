@@ -61,7 +61,6 @@ public class TreeSetAVL<T> implements Iterable<T>{
 	// and and remove
 
 	public boolean add(T data) {
-		//System.out.println("to add: "+data);
 		try {
 			root = subTreeAdd(root, data);
 			size++;
@@ -79,10 +78,7 @@ public class TreeSetAVL<T> implements Iterable<T>{
 		else if (comparision < 0) rootNode.left = subTreeAdd(rootNode.left, data);
 		else throw new DuplicateDataTreeSetException();
 		
-		Node result = balanceNode(rootNode);
-		
-		if (Math.abs(getBalance(result)) > 1) System.out.println("alert");;
-		return result;
+		return balanceNode(rootNode);
 	}
 
 	public boolean remove(T data) {
