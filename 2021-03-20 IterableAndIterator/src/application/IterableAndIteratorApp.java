@@ -12,10 +12,14 @@ public class IterableAndIteratorApp {
 		
 		IterableArray iterableArray = new IterableArray(arr);
 		
+		/*
 		Iterator<Integer> it = iterableArray.iterator();
 		while (it.hasNext()) {
 			System.out.print(it.next() + "  ");
 		}
+		*/
+		
+		for(Integer i : iterableArray) System.out.print(i + "  ");
 		
 		System.out.println();
 	}
