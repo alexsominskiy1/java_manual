@@ -20,8 +20,7 @@ public class IterableArray implements Iterable<Integer>{
 		public Integer next() {
 			if (!hasNext()) throw new NoSuchElementException();
 			return arr[cursor++];
-		}
-		
+		}	
 	}
 
 	public IterableArray(int[] arr) {
