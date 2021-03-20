@@ -13,9 +13,10 @@ public class IterableAndIteratorApp {
 		IterableArray iterableArray = new IterableArray(arr);
 		
 		Iterator<Integer> it = iterableArray.iterator();
-		while (it.hasNext())System.out.println(it.next() + "  ");
+		while (it.hasNext()) {
+			System.out.print(it.next() + "  ");
+		}
 		
 		System.out.println();
 	}
-
 }

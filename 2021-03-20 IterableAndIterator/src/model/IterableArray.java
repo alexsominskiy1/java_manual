@@ -13,7 +13,7 @@ public class IterableArray implements Iterable<Integer>{
 
 		@Override
 		public boolean hasNext() {
-			return cursor > arr.length - 1;
+			return cursor < arr.length;
 		}
 
 		@Override
