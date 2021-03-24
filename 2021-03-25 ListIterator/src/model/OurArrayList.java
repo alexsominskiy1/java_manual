@@ -8,20 +8,20 @@ public class OurArrayList<T> {
 private static final int DEFAULT_CAPACITY = 10;
 	
 	private Object[] arr;
-	private int capacity;
+	private int capacity = DEFAULT_CAPACITY;
 	private int size = 0;
 	
 	// constructors
 	
 	public OurArrayList() {
 		super();
-		arr = new Object[DEFAULT_CAPACITY];
+		this.arr = new Object[DEFAULT_CAPACITY];
 	}
 
 	public OurArrayList(int capacity) {
 		super();
 		this.capacity = Math.max(capacity, DEFAULT_CAPACITY);
-		arr = new Object[this.capacity];
+		this.arr = new Object[this.capacity];
 	}
 	
 	// utils
@@ -92,6 +92,7 @@ private static final int DEFAULT_CAPACITY = 10;
 	// additions
 	
 	public void ensureCapacity(int cap) {
+
 		if (cap > DEFAULT_CAPACITY) {
 			int newCapacity = Math.max(size,  cap);
 			Object[] substitutor = new Object[newCapacity];
@@ -113,86 +114,66 @@ private static final int DEFAULT_CAPACITY = 10;
 	
 	private class OurListIterator implements ListIterator<T>{
 		
-		private boolean moved = false;
-		private boolean changed = false;
-		private boolean goingForward = true;
-		private int cursor;
-	
-		@SuppressWarnings("unused")
-		public OurListIterator() {
-			super();
-			this.cursor = 0;
-		}
+		private int start;
+		private int cursor = -1;
+		private int last = -1;
 
-		public OurListIterator(int cursor) {
+		public OurListIterator(int start) {
 			super();
-			this.cursor = cursor;
+			this.start = start;
 		}
 
 		@Override
 		public boolean hasNext() {
-			return cursor == size;
+			return cursor < size;
 		}
 
 		@Override
 		public boolean hasPrevious() {
-			return cursor == 0;
+			return cursor > 0;
 		}
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public T next() {
-			if (!hasNext()) throw new NoSuchElementException();
-			moved = true;
-			changed = false;
-			goingForward = true;
-			return (T) arr[cursor++];
+			if (cursor < 0) cursor = start;
+			last = cursor++;
+			return (T) arr[last];
 		}
 
 		@Override
-		public int nextIndex() {
+		public int nextIndex() {			
 			return cursor;
 		}
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public T previous() {
-			if (!hasPrevious()) throw new NoSuchElementException();
-			moved = true;
-			changed = false;
-			goingForward = false;
-			return (T) arr[--cursor];
+			if (cursor < 0) cursor = start;
+			last = --cursor;
+			return (T) arr[last];
 		}
 
 		@Override
 		public int previousIndex() {
-			return cursor;
+			return cursor - 1;
 		}
+		
 
 		@Override
 		public void add(T data) {
-			if (moved) {
-				OurArrayList.this.add(goingForward ? cursor - 1 : cursor + 1, data);
-				changed = true;
-				if (goingForward) cursor++;
-			}
-			else throw new  IllegalStateException();
+			OurArrayList.this.add(cursor++, data);
 		}
-		
+
+
 		@Override
-		public void remove() {
-			if (moved && !changed) {
-				OurArrayList.this.remove(goingForward ? cursor - 1 : cursor + 1);
-				changed = true;
-				if (goingForward) cursor--;
-			}
-			else throw new  IllegalStateException();
+		public void remove() {			
+			OurArrayList.this.remove(last);
+			cursor--;
 		}
 
 		@Override
-		public void set(T data) {
-			if (moved && !changed) arr[goingForward ? cursor - 1 : cursor + 1] = data;
-			else throw new  IllegalStateException();
-		}	
+		public void set(T data) {		
+			arr[last] = data;		
+		}
+		
 	}
 }
