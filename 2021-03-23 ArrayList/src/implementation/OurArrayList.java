@@ -2,6 +2,7 @@ package implementation;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 public class OurArrayList<T> implements Iterable<T>{
@@ -146,5 +147,104 @@ public class OurArrayList<T> implements Iterable<T>{
 	
 	public void trimToSize() {
 		ensureCapacity(size);
+	}
+	
+	// list iterators
+	
+	public ListIterator<T> listIterator(int index){
+		return new OurListIterator(index);
+	}
+	
+	public ListIterator<T> listIterator(){
+		return listIterator(0);
+	}
+	
+	private class OurListIterator implements ListIterator<T>{
+		
+		private boolean moved = false;
+		private boolean changed = false;
+		private boolean goingForward = true;
+		private int cursor;
+	
+		@SuppressWarnings("unused")
+		public OurListIterator() {
+			super();
+			this.cursor = 0;
+		}
+
+		public OurListIterator(int cursor) {
+			super();
+			this.cursor = cursor;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return cursor == size;
+		}
+
+		@Override
+		public boolean hasPrevious() {
+			return cursor == 0;
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public T next() {
+			if (!hasNext()) throw new NoSuchElementException();
+			moved = true;
+			changed = false;
+			goingForward = true;
+			return (T) arr[cursor++];
+		}
+
+		@Override
+		public int nextIndex() {
+			return cursor;
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public T previous() {
+			if (!hasPrevious()) throw new NoSuchElementException();
+			moved = true;
+			changed = false;
+			goingForward = false;
+			return (T) arr[--cursor];
+		}
+
+		@Override
+		public int previousIndex() {
+			return cursor;
+		}
+
+		@Override
+		public void add(T data) {
+			if (moved) {
+				OurArrayList.this.add(goingForward ? cursor - 1 : cursor + 1, data);
+				changed = true;
+				if (goingForward) cursor++;
+			}
+			else throw new  IllegalStateException();
+		}
+		
+		@Override
+		public void remove() {
+			if (moved && !changed) {
+				OurArrayList.this.remove(goingForward ? cursor - 1 : cursor + 1);
+				changed = true;
+				if (goingForward) cursor--;
+			}
+			else throw new  IllegalStateException();
+		}
+
+		@Override
+		public void set(T data) {
+			if (moved && !changed) arr[goingForward ? cursor - 1 : cursor + 1] = data;
+			else throw new  IllegalStateException();
+		}
+		
+	
+		
+		
 	}
 }
