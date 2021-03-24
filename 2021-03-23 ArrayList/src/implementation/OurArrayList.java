@@ -179,7 +179,7 @@ public class OurArrayList<T> implements Iterable<T>{
 
 		@Override
 		public boolean hasNext() {
-			return cursor == size;
+			return cursor < size;
 		}
 
 		@Override
