@@ -10,20 +10,20 @@ public class OurArrayList<T> implements Iterable<T>{
 	private static final int DEFAULT_CAPACITY = 10;
 	
 	private Object[] arr;
-	private int capacity;
+	private int capacity = DEFAULT_CAPACITY;
 	private int size = 0;
 	
 	// constructors
 	
 	public OurArrayList() {
 		super();
-		arr = new Object[DEFAULT_CAPACITY];
+		this.arr = new Object[DEFAULT_CAPACITY];
 	}
 
 	public OurArrayList(int capacity) {
 		super();
 		this.capacity = Math.max(capacity, DEFAULT_CAPACITY);
-		arr = new Object[this.capacity];
+		this.arr = new Object[this.capacity];
 	}
 	
 	// utils
@@ -47,6 +47,16 @@ public class OurArrayList<T> implements Iterable<T>{
 
 	private void enlargeArray() {
 		ensureCapacity(2*capacity);
+	}
+	
+	public void ensureCapacity(int cap) {
+		if (cap > DEFAULT_CAPACITY) {
+			int newCapacity = Math.max(size,  cap);
+			Object[] substitutor = new Object[newCapacity];
+			System.arraycopy(arr, 0, substitutor, 0, size);
+			arr = substitutor;
+			capacity = newCapacity;
+		}
 	}
 	
 	public void add(T data) {		
@@ -135,116 +145,7 @@ public class OurArrayList<T> implements Iterable<T>{
 	
 	// additions
 	
-	public void ensureCapacity(int cap) {
-		if (cap > DEFAULT_CAPACITY) {
-			int newCapacity = Math.max(size,  cap);
-			Object[] substitutor = new Object[newCapacity];
-			System.arraycopy(arr, 0, substitutor, 0, size);
-			arr = substitutor;
-			capacity = newCapacity;
-		}
-	}
-	
 	public void trimToSize() {
 		ensureCapacity(size);
-	}
-	
-	// list iterators
-	
-	public ListIterator<T> listIterator(int index){
-		return new OurListIterator(index);
-	}
-	
-	public ListIterator<T> listIterator(){
-		return listIterator(0);
-	}
-	
-	private class OurListIterator implements ListIterator<T>{
-		
-		private boolean moved = false;
-		private boolean changed = false;
-		private boolean goingForward = true;
-		private int cursor;
-	
-		@SuppressWarnings("unused")
-		public OurListIterator() {
-			super();
-			this.cursor = 0;
-		}
-
-		public OurListIterator(int cursor) {
-			super();
-			this.cursor = cursor;
-		}
-
-		@Override
-		public boolean hasNext() {
-			return cursor < size;
-		}
-
-		@Override
-		public boolean hasPrevious() {
-			return cursor == 0;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public T next() {
-			if (!hasNext()) throw new NoSuchElementException();
-			moved = true;
-			changed = false;
-			goingForward = true;
-			return (T) arr[cursor++];
-		}
-
-		@Override
-		public int nextIndex() {
-			return cursor;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public T previous() {
-			if (!hasPrevious()) throw new NoSuchElementException();
-			moved = true;
-			changed = false;
-			goingForward = false;
-			return (T) arr[--cursor];
-		}
-
-		@Override
-		public int previousIndex() {
-			return cursor;
-		}
-
-		@Override
-		public void add(T data) {
-			if (moved) {
-				OurArrayList.this.add(goingForward ? cursor - 1 : cursor + 1, data);
-				changed = true;
-				if (goingForward) cursor++;
-			}
-			else throw new  IllegalStateException();
-		}
-		
-		@Override
-		public void remove() {
-			if (moved && !changed) {
-				OurArrayList.this.remove(goingForward ? cursor - 1 : cursor + 1);
-				changed = true;
-				if (goingForward) cursor--;
-			}
-			else throw new  IllegalStateException();
-		}
-
-		@Override
-		public void set(T data) {
-			if (moved && !changed) arr[goingForward ? cursor - 1 : cursor + 1] = data;
-			else throw new  IllegalStateException();
-		}
-		
-	
-		
-		
 	}
 }
