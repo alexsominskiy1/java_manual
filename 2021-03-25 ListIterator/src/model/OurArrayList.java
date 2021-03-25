@@ -1,9 +1,10 @@
 package model;
 
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-public class OurArrayList<T> {
+public class OurArrayList<T> implements Iterable<T> {
 	
 private static final int DEFAULT_CAPACITY = 10;
 	
@@ -23,13 +24,7 @@ private static final int DEFAULT_CAPACITY = 10;
 		this.capacity = Math.max(capacity, DEFAULT_CAPACITY);
 		this.arr = new Object[this.capacity];
 	}
-	
-	// utils
-	
-	private void throwOutOfBounds(String msg, int index) {
-		throw new IndexOutOfBoundsException(msg + "; index: "+ index + "; size:" + size);
-	}
-	
+		
 	// modifications
 	
 	public void add(int index, T data) {
@@ -49,6 +44,19 @@ private static final int DEFAULT_CAPACITY = 10;
 	
 	public void add(T data) {		
 		add(size, data);
+	}
+	
+	// ensure capacity
+	
+	public void ensureCapacity(int cap) {
+
+		if (cap > DEFAULT_CAPACITY) {
+			int newCapacity = Math.max(size,  cap);
+			Object[] substitutor = new Object[newCapacity];
+			System.arraycopy(arr, 0, substitutor, 0, size);
+			arr = substitutor;
+			capacity = newCapacity;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -89,27 +97,28 @@ private static final int DEFAULT_CAPACITY = 10;
 		return "[" + stringBuilder.toString().substring(0, stringBuilder.length() -2) + "]";
 	}
 	
-	// additions
+	// iterator
 	
-	public void ensureCapacity(int cap) {
-
-		if (cap > DEFAULT_CAPACITY) {
-			int newCapacity = Math.max(size,  cap);
-			Object[] substitutor = new Object[newCapacity];
-			System.arraycopy(arr, 0, substitutor, 0, size);
-			arr = substitutor;
-			capacity = newCapacity;
-		}
+	public Iterator<T> iterator(){
+		return listIterator();
 	}
 	
 	// list iterators
 	
+	public ListIterator<T> listIteratorImmutable(int index){
+		return new OurListIterator(index, true, true);
+	}
+	
+	public ListIterator<T> listIteratorUnmodifiable(int index){
+		return new OurListIterator(index, true, false);
+	}
+	
 	public ListIterator<T> listIterator(int index){
-		return new OurListIterator(index);
+		return new OurListIterator(index, false, false);
 	}
 	
 	public ListIterator<T> listIterator(){
-		return listIterator(0);
+		return new OurListIterator(0, false, false);
 	}
 	
 	private class OurListIterator implements ListIterator<T>{
@@ -117,10 +126,16 @@ private static final int DEFAULT_CAPACITY = 10;
 		private int start;
 		private int cursor = -1;
 		private int last = -1;
+		
+		private boolean unchangeable = true;
+		private boolean unmodifiable = false;
+		private boolean immutable = false;
 
-		public OurListIterator(int start) {
+		public OurListIterator(int start, boolean unmodifiable, boolean immutable) {
 			super();
 			this.start = start;
+			this.unmodifiable = unmodifiable || immutable;
+			this.immutable = immutable;
 		}
 
 		@Override
@@ -133,10 +148,13 @@ private static final int DEFAULT_CAPACITY = 10;
 			return cursor > 0;
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public T next() {
+			throwNoSuchElement(!hasNext(), "next");
 			if (cursor < 0) cursor = start;
 			last = cursor++;
+			unchangeable = false;
 			return (T) arr[last];
 		}
 
@@ -145,10 +163,13 @@ private static final int DEFAULT_CAPACITY = 10;
 			return cursor;
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public T previous() {
+			throwNoSuchElement(!hasPrevious(), "previous");
 			if (cursor < 0) cursor = start;
 			last = --cursor;
+			unchangeable = false;
 			return (T) arr[last];
 		}
 
@@ -160,20 +181,45 @@ private static final int DEFAULT_CAPACITY = 10;
 
 		@Override
 		public void add(T data) {
+			throwUnsupportedOperation(unmodifiable, "add");
 			OurArrayList.this.add(cursor++, data);
+			unchangeable = true;
 		}
 
 
 		@Override
-		public void remove() {			
+		public void remove() {
+			throwUnsupportedOperation(unmodifiable, "remove");
+			throwIllegalState(unchangeable, "remove");
 			OurArrayList.this.remove(last);
 			cursor--;
+			unchangeable = true;
 		}
 
 		@Override
-		public void set(T data) {		
+		public void set(T data) {
+			throwUnsupportedOperation(immutable, "set");
+			throwIllegalState(unchangeable, "set");
 			arr[last] = data;		
 		}
-		
 	}
+	
+	// exceptions
+
+	private void throwOutOfBounds(String msg, int index) {
+		throw new IndexOutOfBoundsException(msg + "; index: "+ index + "; size:" + size);
+	}
+
+	private void throwNoSuchElement(boolean noSuch, String msg) {
+		if(noSuch) throw new NoSuchElementException("list iterator: " + msg);
+	}
+
+	private void throwIllegalState(boolean illegal, String msg) {
+		if(illegal) throw new IllegalStateException("list iterator: " + msg);
+	}
+
+	private void throwUnsupportedOperation(boolean unsupported, String msg) {
+		if(unsupported) throw new UnsupportedOperationException("list iterator: " + msg);
+	}
+		
 }

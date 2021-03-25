@@ -1,6 +1,5 @@
 package application;
 
-import java.util.ArrayList;
 import java.util.ListIterator;
 
 import model.OurArrayList;
@@ -10,7 +9,6 @@ public class ListIteratorApp {
 	public static void main(String[] args) {
 		
 		OurArrayList<Integer> ourArrayList = new OurArrayList<>();
-		//ArrayList<Integer> ourArrayList = new ArrayList<>();
 		for (int i = 1; i < 10; i++)ourArrayList.add(i*10);
 		
 		for (int i=0; i<ourArrayList.size(); i++)System.out.print(ourArrayList.get(i) + "  ");
@@ -21,22 +19,22 @@ public class ListIteratorApp {
 		System.out.println(lit.next());
 		System.out.println(lit.next());
 		
-		System.out.println("set");
+		System.out.println("set 999");
 		lit.set(999);
-		show(ourArrayList);
+		System.out.println(ourArrayList);
 		
 		System.out.println(lit.next());
 	
 		System.out.println("remove");
 		lit.remove();
-		show(ourArrayList);
+		System.out.println(ourArrayList);
 		
 		System.out.println(lit.next());
 		
-		System.out.println("add");
+		System.out.println("add 111, 222");
 		lit.add(111);
 		lit.add(222);
-		show(ourArrayList);
+		System.out.println(ourArrayList);
 		
 		System.out.println(lit.next());
 			
@@ -44,36 +42,30 @@ public class ListIteratorApp {
 		System.out.println(lit.previous());
 		System.out.println(lit.previous());
 		
-		System.out.println("set");
+		System.out.println("set 888");
 		lit.set(888);
-		show(ourArrayList);
+		System.out.println(ourArrayList);
 		
 		System.out.println(lit.previous());
 		
 		System.out.println("remove");
 		lit.remove();
-		show(ourArrayList);
+		System.out.println(ourArrayList);
 		
-		System.out.println("add");
+		System.out.println("add 333");
 		lit.add(333);
-		show(ourArrayList);
+		System.out.println(ourArrayList);
 
 		System.out.println("\nreverse\n");
 		System.out.println(lit.next());
 		System.out.println(lit.next());
 		
 		
-		System.out.println("set");
+		System.out.println("set 777");
 		lit.set(777);
-		show(ourArrayList);
+		System.out.println(ourArrayList);
 		
 		System.out.println(lit.next());
 
 	}
-	
-	private static void show(OurArrayList<?> ourArrayList) {
-		for (int i=0; i<ourArrayList.size(); i++)System.out.print(ourArrayList.get(i) + "  ");
-		System.out.println();
-	}
-
 }
