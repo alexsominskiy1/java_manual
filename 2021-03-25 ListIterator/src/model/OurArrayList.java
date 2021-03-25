@@ -2,7 +2,6 @@ package model;
 
 import java.util.Iterator;
 import java.util.ListIterator;
-import java.util.NoSuchElementException;
 
 public class OurArrayList<T> implements Iterable<T> {
 	
@@ -112,114 +111,25 @@ private static final int DEFAULT_CAPACITY = 10;
 	// list iterators
 	
 	public ListIterator<T> listIteratorImmutable(int index){
-		return new OurListIterator(index, true, true);
+		OurArrayListIterator<T> ourListIterator = (OurArrayListIterator<T>) listIteratorUnmodifiable(index);
+		ourListIterator.setImmutable(true);
+		return ourListIterator;
 	}
 	
 	public ListIterator<T> listIteratorUnmodifiable(int index){
-		return new OurListIterator(index, true, false);
+		OurArrayListIterator<T> ourListIterator = (OurArrayListIterator<T>) listIterator(index);
+		ourListIterator.setUnmodifiable(true);
+		return ourListIterator;
 	}
 	
 	public ListIterator<T> listIterator(int index){
-		return new OurListIterator(index, false, false);
+		if (index < 0 || index > size) throwOutOfBounds("list iterator", index);
+		OurArrayListIterator<T> ourListIterator = (OurArrayListIterator<T>) listIterator();
+		ourListIterator.setStart(index);
+		return ourListIterator;
 	}
 	
 	public ListIterator<T> listIterator(){
-		return new OurListIterator(0, false, false);
+		return new OurArrayListIterator<T>(this);
 	}
-	
-	private class OurListIterator implements ListIterator<T>{
-		
-		private int start;
-		private int cursor = -1;
-		private int last = -1;
-		
-		private boolean unchangeable = true;
-		private boolean unmodifiable = false;
-		private boolean immutable = false;
-
-		public OurListIterator(int start, boolean unmodifiable, boolean immutable) {
-			super();
-			if (start < 0 || start >= size) throwOutOfBounds("list iterator", start);
-			this.start = start;
-			this.unmodifiable = unmodifiable || immutable;
-			this.immutable = immutable;
-		}
-
-		@Override
-		public boolean hasNext() {
-			return cursor < size;
-		}
-
-		@Override
-		public boolean hasPrevious() {
-			return cursor > 0;
-		}
-
-		@Override
-		public T next() {
-			throwNoSuchElement(!hasNext(), "next");
-			if (cursor < 0) cursor = start;
-			last = cursor++;
-			unchangeable = false;
-			return OurArrayList.this.get(last);
-		}
-
-		@Override
-		public int nextIndex() {			
-			return cursor;
-		}
-
-		@Override
-		public T previous() {
-			throwNoSuchElement(!hasPrevious(), "previous");
-			if (cursor < 0) cursor = start;
-			last = --cursor;
-			unchangeable = false;
-			return OurArrayList.this.get(last);
-		}
-
-		@Override
-		public int previousIndex() {
-			return cursor - 1;
-		}
-		
-		@Override
-		public void add(T data) {
-			throwUnsupportedOperation(unmodifiable, "add");
-			OurArrayList.this.add(cursor++, data);
-			unchangeable = true;
-		}
-
-		@Override
-		public void remove() {
-			throwUnsupportedOperation(unmodifiable, "remove");
-			throwIllegalState(unchangeable, "remove");
-			OurArrayList.this.remove(last);
-			cursor--;
-			unchangeable = true;
-		}
-
-		@Override
-		public void set(T data) {
-			throwUnsupportedOperation(immutable, "set");
-			throwIllegalState(unchangeable, "set");
-			OurArrayList.this.set(last, data);		
-		}
-	
-		// exceptions
-
-		private void throwNoSuchElement(boolean noSuch, String msg) {
-			if(noSuch) throw new NoSuchElementException("list iterator: " + msg);
-		}
-
-		private void throwIllegalState(boolean illegal, String msg) {
-			if(illegal) throw new IllegalStateException("list iterator: " + msg);
-		}
-
-		private void throwUnsupportedOperation(boolean unsupported, String msg) {
-			if(unsupported) throw new UnsupportedOperationException("list iterator: " + msg);
-		}
-	
-	}
-		
 }
