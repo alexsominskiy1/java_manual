@@ -133,6 +133,7 @@ private static final int DEFAULT_CAPACITY = 10;
 
 		public OurListIterator(int start, boolean unmodifiable, boolean immutable) {
 			super();
+			if (start < 0 || start >= size) throwOutOfBounds("list iterator", start);
 			this.start = start;
 			this.unmodifiable = unmodifiable || immutable;
 			this.immutable = immutable;
