@@ -4,13 +4,19 @@ import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-public class OurArrayList<T>  {
+public class OurArrayList<T> implements Iterable<T> {
 	
 private static final int DEFAULT_CAPACITY = 10;
 	
 	private Object[] arr;
 	private int capacity = DEFAULT_CAPACITY;
 	private int size = 0;
+	
+	// exceptions
+
+	private void throwOutOfBounds(String msg, int index) {
+		throw new IndexOutOfBoundsException(msg + "; index: "+ index + "; size:" + size);
+	}
 	
 	// constructors
 	
@@ -149,14 +155,13 @@ private static final int DEFAULT_CAPACITY = 10;
 			return cursor > 0;
 		}
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public T next() {
 			throwNoSuchElement(!hasNext(), "next");
 			if (cursor < 0) cursor = start;
 			last = cursor++;
 			unchangeable = false;
-			return (T) arr[last];
+			return OurArrayList.this.get(last);
 		}
 
 		@Override
@@ -164,14 +169,13 @@ private static final int DEFAULT_CAPACITY = 10;
 			return cursor;
 		}
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public T previous() {
 			throwNoSuchElement(!hasPrevious(), "previous");
 			if (cursor < 0) cursor = start;
 			last = --cursor;
 			unchangeable = false;
-			return (T) arr[last];
+			return OurArrayList.this.get(last);
 		}
 
 		@Override
@@ -179,14 +183,12 @@ private static final int DEFAULT_CAPACITY = 10;
 			return cursor - 1;
 		}
 		
-
 		@Override
 		public void add(T data) {
 			throwUnsupportedOperation(unmodifiable, "add");
 			OurArrayList.this.add(cursor++, data);
 			unchangeable = true;
 		}
-
 
 		@Override
 		public void remove() {
@@ -201,26 +203,23 @@ private static final int DEFAULT_CAPACITY = 10;
 		public void set(T data) {
 			throwUnsupportedOperation(immutable, "set");
 			throwIllegalState(unchangeable, "set");
-			arr[last] = data;		
+			OurArrayList.this.set(last, data);		
 		}
-	}
 	
-	// exceptions
+		// exceptions
 
-	private void throwOutOfBounds(String msg, int index) {
-		throw new IndexOutOfBoundsException(msg + "; index: "+ index + "; size:" + size);
-	}
+		private void throwNoSuchElement(boolean noSuch, String msg) {
+			if(noSuch) throw new NoSuchElementException("list iterator: " + msg);
+		}
 
-	private void throwNoSuchElement(boolean noSuch, String msg) {
-		if(noSuch) throw new NoSuchElementException("list iterator: " + msg);
-	}
+		private void throwIllegalState(boolean illegal, String msg) {
+			if(illegal) throw new IllegalStateException("list iterator: " + msg);
+		}
 
-	private void throwIllegalState(boolean illegal, String msg) {
-		if(illegal) throw new IllegalStateException("list iterator: " + msg);
-	}
-
-	private void throwUnsupportedOperation(boolean unsupported, String msg) {
-		if(unsupported) throw new UnsupportedOperationException("list iterator: " + msg);
+		private void throwUnsupportedOperation(boolean unsupported, String msg) {
+			if(unsupported) throw new UnsupportedOperationException("list iterator: " + msg);
+		}
+	
 	}
 		
 }
