@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-public class OurArrayList<T> implements Iterable<T> {
+public class OurArrayList<T>  {
 	
 private static final int DEFAULT_CAPACITY = 10;
 	
