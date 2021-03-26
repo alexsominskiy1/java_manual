@@ -80,7 +80,7 @@ public class OurListIterator<T> implements ListIterator<T>{
 
 	@Override
 	public void remove() {
-		throwForbidden(unmodifiable, "remove");
+		checkRestrictions(unmodifiable, "remove");
 		list.remove(last);
 		if(cursor > last) cursor--;
 		illegalState = true;
@@ -88,13 +88,13 @@ public class OurListIterator<T> implements ListIterator<T>{
 
 	@Override
 	public void set(T data) {
-		throwForbidden(immutable, "set");
+		checkRestrictions(immutable, "set");
 		list.set(last, data);		
 	}
 
 	// exceptions to throw
 
-	private void throwForbidden(boolean restriction, String msg) {
+	private void checkRestrictions(boolean restriction, String msg) {
 		if(restriction) throw new UnsupportedOperationException("list iterator: " + msg);
 		if (illegalState) throw new IllegalStateException("list iterator: " + msg);
 	}
