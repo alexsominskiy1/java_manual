@@ -111,25 +111,19 @@ private static final int DEFAULT_CAPACITY = 10;
 	// list iterators
 	
 	public ListIterator<T> listIteratorImmutable(int index){
-		OurArrayListIterator<T> ourListIterator = (OurArrayListIterator<T>) listIteratorUnmodifiable(index);
-		ourListIterator.setImmutable(true);
-		return ourListIterator;
+		return new OurListIterator<T>(this, index, ListIteratorRestrictions.IMMUTABLE);
 	}
 	
 	public ListIterator<T> listIteratorUnmodifiable(int index){
-		OurArrayListIterator<T> ourListIterator = (OurArrayListIterator<T>) listIterator(index);
-		ourListIterator.setUnmodifiable(true);
-		return ourListIterator;
+		return new OurListIterator<T>(this, index, ListIteratorRestrictions.IMMUTABLE);
 	}
 	
 	public ListIterator<T> listIterator(int index){
 		if (index < 0 || index > size) throwOutOfBounds("list iterator", index);
-		OurArrayListIterator<T> ourListIterator = (OurArrayListIterator<T>) listIterator();
-		ourListIterator.setStart(index);
-		return ourListIterator;
+		return new OurListIterator<T>(this, index);
 	}
 	
 	public ListIterator<T> listIterator(){
-		return new OurArrayListIterator<T>(this);
+		return new OurListIterator<T>(this);
 	}
 }
