@@ -28,11 +28,6 @@ public class ArrayListApp {
 		System.out.println("capacity: "+ourArrayList.capacity());
 		
 		
-		
-		
-		
-		
-		
 	}
 
 }

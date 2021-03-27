@@ -1,6 +1,5 @@
 package implementation;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -114,23 +113,94 @@ public class OurArrayList<T> implements Iterable<T>{
 		return indexOf(data) >= 0;
 	}
 	
-	public Iterator<T> iterator(){
-		return new OurArrayListIterator();
-	}
+	// iterator
 	
-	private class OurArrayListIterator implements Iterator<T>{
+		public Iterator<T> iterator(){
+			return listIterator();
+		}
 		
-		int current = 0;
-
-		public boolean hasNext() {
-			return current < size;
+		// list iterators
+		
+		public ListIterator<T> listIterator(int index){
+			if (index < 0 || index > size) throwOutOfBounds("list iterator", index);
+			return new OurListIterator(index);
+		}
+		
+		public ListIterator<T> listIterator(){
+			return new OurListIterator();
 		}
 
-		@SuppressWarnings("unchecked")
+	
+	private class OurListIterator implements ListIterator<T>{
+		
+		private int cursor = 0;
+		private int last;
+		
+		private boolean illegalState = true;
+
+		private OurListIterator() {
+			super();
+		}
+		
+		private OurListIterator(int cursor) {
+			super();
+			this.cursor = cursor;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return cursor < OurArrayList.this.size();
+		}
+
 		@Override
 		public T next() {
-			if (!hasNext()) throw new NoSuchElementException();
-			return (T)arr[current++];
+			if(!hasNext()) throw new NoSuchElementException("list iterator: next");
+			last = cursor++;
+			illegalState = false;
+			return OurArrayList.this.get(last);
+		}
+
+		@Override
+		public int nextIndex() {			
+			return cursor;
+		}
+		
+		@Override
+		public boolean hasPrevious() {
+			return cursor > 0;
+		}
+
+		@Override
+		public T previous() {
+			if(!hasPrevious()) throw new NoSuchElementException("list iterator: previous");
+			last = --cursor;
+			illegalState = false;
+			return OurArrayList.this.get(last);
+		}
+
+		@Override
+		public int previousIndex() {
+			return cursor - 1;
+		}
+		
+		@Override
+		public void add(T data) {
+			OurArrayList.this.add(cursor++, data);
+			illegalState = true;
+		}
+
+		@Override
+		public void remove() {
+			if (illegalState) throw new IllegalStateException("list iterator: remove");
+			OurArrayList.this.remove(last);
+			if(cursor > last) cursor--;
+			illegalState = true;
+		}
+
+		@Override
+		public void set(T data) {
+			if (illegalState) throw new IllegalStateException("list iterator: set");
+			OurArrayList.this.set(last, data);		
 		}
 	}
 	
