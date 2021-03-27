@@ -44,7 +44,7 @@ public class OurListIterator<T> implements ListIterator<T>{
 		if(!hasNext()) throw new NoSuchElementException("list iterator: next");
 		last = cursor++;
 		illegalState = false;
-		return (T) list.get(last);
+		return list.get(last);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class OurListIterator<T> implements ListIterator<T>{
 		if(!hasPrevious()) throw new NoSuchElementException("list iterator: previous");
 		last = --cursor;
 		illegalState = false;
-		return (T) list.get(last);
+		return list.get(last);
 	}
 
 	@Override
