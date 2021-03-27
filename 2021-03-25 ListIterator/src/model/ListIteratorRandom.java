@@ -1,11 +1,12 @@
 package model;
 
+import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-public class OurListIterator<T> implements ListIterator<T>{
+public class ListIteratorRandom<T> implements ListIterator<T>{
 	
-	private OurArrayList<T> list;
+	List<T> list;
 	
 	private int cursor = 0;
 	private int last;
@@ -15,18 +16,18 @@ public class OurListIterator<T> implements ListIterator<T>{
 	
 	private boolean illegalState = true;
 
-	public OurListIterator(OurArrayList<T> list) {
+	public ListIteratorRandom(OurArrayList<T> list) {
 		super();
 		this.list = list;
 	}
 	
-	public OurListIterator(OurArrayList<T> list, int cursor) {
+	public ListIteratorRandom(OurArrayList<T> list, int cursor) {
 		super();
 		this.list = list;
 		this.cursor = cursor;
 	}
 
-	public OurListIterator(OurArrayList<T> list, int cursor, ListIteratorRestrictions restrictions) {
+	public ListIteratorRandom(OurArrayList<T> list, int cursor, ListIteratorRestrictions restrictions) {
 		super();
 		this.list = list;
 		this.cursor = cursor;
