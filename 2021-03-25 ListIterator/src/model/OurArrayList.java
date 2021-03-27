@@ -115,7 +115,7 @@ private static final int DEFAULT_CAPACITY = 10;
 	}
 	
 	public ListIterator<T> listIteratorUnmodifiable(int index){
-		return new OurListIterator<T>(this, index, ListIteratorRestrictions.IMMUTABLE);
+		return new OurListIterator<T>(this, index, ListIteratorRestrictions.UNMODIFIABLE);
 	}
 	
 	public ListIterator<T> listIterator(int index){

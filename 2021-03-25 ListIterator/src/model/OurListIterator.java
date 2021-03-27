@@ -8,7 +8,7 @@ public class OurListIterator<T> implements ListIterator<T>{
 	private OurArrayList<T> list;
 	
 	private int cursor = 0;
-	private int last = 0;
+	private int last;
 	
 	private boolean unmodifiable = false;
 	private boolean immutable = false;
@@ -24,7 +24,6 @@ public class OurListIterator<T> implements ListIterator<T>{
 		super();
 		this.list = list;
 		this.cursor = cursor;
-		this.last = cursor;
 	}
 
 	public OurListIterator(OurArrayList<T> list, int cursor, ListIteratorRestrictions restrictions) {
