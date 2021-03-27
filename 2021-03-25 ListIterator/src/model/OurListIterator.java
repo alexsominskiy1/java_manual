@@ -91,7 +91,7 @@ public class OurListIterator<T> implements ListIterator<T>{
 		list.set(last, data);		
 	}
 
-	// exceptions to throw
+	// check restrictions
 
 	private void checkRestrictions(boolean restriction, String msg) {
 		if(restriction) throw new UnsupportedOperationException("list iterator: " + msg);
