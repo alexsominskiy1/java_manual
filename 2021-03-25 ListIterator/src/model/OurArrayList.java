@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 @SuppressWarnings("serial")
-public class OurArrayList<T> extends ArrayList<T> implements Iterable<T> {
+public class OurArrayList<T> extends ArrayList<T> {
 	
 	// iterator
 	
