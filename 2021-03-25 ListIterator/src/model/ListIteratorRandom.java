@@ -16,18 +16,18 @@ public class ListIteratorRandom<T> implements ListIterator<T>{
 	
 	private boolean illegalState = true;
 
-	public ListIteratorRandom(OurArrayList<T> list) {
+	public ListIteratorRandom(List<T> list) {
 		super();
 		this.list = list;
 	}
 	
-	public ListIteratorRandom(OurArrayList<T> list, int cursor) {
+	public ListIteratorRandom(List<T> list, int cursor) {
 		super();
 		this.list = list;
 		this.cursor = cursor;
 	}
 
-	public ListIteratorRandom(OurArrayList<T> list, int cursor, ListIteratorRestrictions restrictions) {
+	public ListIteratorRandom(List<T> list, int cursor, ListIteratorRestrictions restrictions) {
 		super();
 		this.list = list;
 		this.cursor = cursor;
