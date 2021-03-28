@@ -34,6 +34,12 @@ public class OurArrayList<T> implements Iterable<T>{
 	
 	// modifications
 	
+	
+	public void add(T data) {		
+		if (size >= capacity) enlargeArray();
+		arr[size++] = data;
+	}
+	
 	public void add(int index, T data) {
 
 		if (index < 0 || index > size) throwOutOfBounds("add", index);	
@@ -57,10 +63,6 @@ public class OurArrayList<T> implements Iterable<T>{
 			arr = substitutor;
 			capacity = newCapacity;
 		}
-	}
-	
-	public void add(T data) {		
-		add(size, data);
 	}
 
 	@SuppressWarnings("unchecked")
