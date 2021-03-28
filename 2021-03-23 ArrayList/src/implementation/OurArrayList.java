@@ -2,8 +2,6 @@ package implementation;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
 
 public class OurArrayList<T> implements Iterable<T>{
 	
@@ -139,6 +137,7 @@ public class OurArrayList<T> implements Iterable<T>{
 			return cursor < size();
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public T next() {
 			return (T) arr[cursor++];
