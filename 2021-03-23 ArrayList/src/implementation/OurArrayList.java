@@ -55,7 +55,7 @@ public class OurArrayList<T> implements Iterable<T>{
 	
 	public void ensureCapacity(int cap) {
 		if (cap > DEFAULT_CAPACITY) {
-			int newCapacity = Math.max(size,  cap);
+			int newCapacity = Math.max(size+1,  cap);
 			Object[] substitutor = new Object[newCapacity];
 			System.arraycopy(arr, 0, substitutor, 0, size);
 			arr = substitutor;
