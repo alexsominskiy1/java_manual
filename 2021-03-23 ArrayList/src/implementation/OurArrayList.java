@@ -83,9 +83,12 @@ public class OurArrayList<T> implements Iterable<T>{
 		return (T)arr[index];
 	}
 	
-	public void set(int index, T data) {
+	public T set(int index, T data) {
 		if (index < 0 || index >= size) throwOutOfBounds("set", index);
+		@SuppressWarnings("unchecked")
+		T previous = (T) arr[index];
 		arr[index] = data;
+		return previous;
 	}
 	
 	// queries
