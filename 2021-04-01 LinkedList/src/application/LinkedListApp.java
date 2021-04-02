@@ -1,12 +1,13 @@
 package application;
 
-import model.OurLinkedList;
+import model.LinkedListOperations;
+//import model.OurLinkedList;
 
 public class LinkedListApp {
 
 	public static void main(String[] args) {
 		
-		OurLinkedList<Integer> ourLinkedList = new OurLinkedList<>();
+		LinkedListOperations<Integer> ourLinkedList = new LinkedListOperations<>();
 		
 		ourLinkedList.addLast(30);
 		ourLinkedList.addLast(40);
@@ -17,18 +18,21 @@ public class LinkedListApp {
 		for (Integer i : ourLinkedList)System.out.print(i + "  ");
 		System.out.println();
 		
-		ourLinkedList.addBefore(2, 666);
+		ourLinkedList.add(2, 666);
 		
 		for (Integer i : ourLinkedList)System.out.print(i + "  ");
 		System.out.println();
 		
 		ourLinkedList.set(2, 777);
+		
+		System.out.println(ourLinkedList.indexOf(20));
+		System.out.println(ourLinkedList.contains(25));
 
 		for (Integer i : ourLinkedList)System.out.print(i + "  ");
 		System.out.println();
 		
-		System.out.println(ourLinkedList.removeFirst());
-		System.out.println(ourLinkedList.removeLast());
+		System.out.println(ourLinkedList.pollFirst());
+		System.out.println(ourLinkedList.pollLast());
 		System.out.println(ourLinkedList.remove(1));
 		
 		for (Integer i : ourLinkedList)System.out.print(i + "  ");
