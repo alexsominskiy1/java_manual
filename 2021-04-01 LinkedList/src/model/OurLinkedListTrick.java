@@ -3,7 +3,7 @@ package model;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class OurLinkedListSourceCode<T> implements Iterable<T> {
+public class OurLinkedListTrick<T> implements Iterable<T> {
 	
 	private class Node {
 		
@@ -22,7 +22,7 @@ public class OurLinkedListSourceCode<T> implements Iterable<T> {
 	private final Node ZERO = new Node(null, null, null);
 	private int size = 0;
 	
-	public OurLinkedListSourceCode() {
+	public OurLinkedListTrick() {
 		super();
 		ZERO.next = ZERO;
 		ZERO.prev = ZERO;
@@ -73,11 +73,11 @@ public class OurLinkedListSourceCode<T> implements Iterable<T> {
 		return remove(getNode(index));
 	}
 	
-	public T removeFirst() {
+	public T pollFirst() {
 		return size == 0 ? null : remove(ZERO.next);
 	}
 	
-	public T removeLast() {
+	public T pollLast() {
 		return size == 0 ? null : remove(ZERO.prev);
 	}
 	

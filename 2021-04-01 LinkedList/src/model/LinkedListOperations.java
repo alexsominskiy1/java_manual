@@ -121,7 +121,7 @@ public class LinkedListOperations<T> implements Iterable<T>{
 		size++;
 	}
 	
-	public void add(int index, T data) {
+	public void addBefore(int index, T data) {
 		if (index < 0 || index > size) new IndexOutOfBoundsException();
 		if (index == 0) addFirst(data);
 		else if (index == size) addLast(data);
@@ -137,16 +137,18 @@ public class LinkedListOperations<T> implements Iterable<T>{
 	
 	public T remove(int index) {
 		if (index < 0 || index >= size) new IndexOutOfBoundsException();
-		return index == 0 ? pollFirst() : (index == size - 1 ? pollLast() : removeNode(getNode(index)));
+		if (index == 0) return pollFirst();
+		else if (index == size - 1) return pollLast();
+		else return removeNode(getNode(index));
 	}
 	
 	public T get (int index) {		
-		return (index == 0 ? head : (index == size - 1 ? tail : getNode(index))).data;
+		return getNode(index).data;
 	}
 	
 	public T set(int index, T data) {
 		if (index < 0 || index >= size) new IndexOutOfBoundsException();
-		Node node = (index == 0 ? head : (index == size - 1 ? tail : getNode(index)));
+		Node node = getNode(index);
 		T pocket = node.data;
 		node.data = data;
 		return pocket;

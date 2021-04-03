@@ -1,7 +1,7 @@
 package application;
 
 import model.LinkedListOperations;
-//import model.OurLinkedList;
+import model.OurLinkedListTrick;
 
 public class LinkedListApp {
 
@@ -18,7 +18,7 @@ public class LinkedListApp {
 		for (Integer i : ourLinkedList)System.out.print(i + "  ");
 		System.out.println();
 		
-		ourLinkedList.add(2, 666);
+		ourLinkedList.addBefore(2, 666);
 		
 		for (Integer i : ourLinkedList)System.out.print(i + "  ");
 		System.out.println();
