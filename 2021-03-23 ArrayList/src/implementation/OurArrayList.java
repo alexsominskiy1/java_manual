@@ -100,17 +100,10 @@ public class OurArrayList<T> implements Iterable<T>{
 	}
 	
 	public int indexOf(T data) {
-		if (data == null) {
-			for (int i=0; i < size; i++) {
-				if (arr[i] == null) return i;
-			}
+		for (int i = 0; i < size; i++) {
+			if (data == null ? arr[i] == null : data.equals(arr[i])) return i;
 		}
-		else {
-			for (int i=0; i < size; i++) {
-				if (data.equals(arr[i])) return i;
-			}
-		}
-		return -1;
+		return - 1;
 	}
 	
 	public boolean contains(T data) {
