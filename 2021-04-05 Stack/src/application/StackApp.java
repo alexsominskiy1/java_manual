@@ -1,12 +1,12 @@
 package application;
 
-import model.Stack;
+import model.OurStack;
 
 public class StackApp {
 
 	public static void main(String[] args) {
 		
-		Stack<Integer> stack = new Stack<>(4);
+		OurStack<Integer> stack = new OurStack<>(4);
 		
 		System.out.println(stack.offer(10));
 		System.out.println(stack.offer(20));

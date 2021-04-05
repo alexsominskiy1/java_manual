@@ -2,7 +2,7 @@ package model;
 
 import java.util.NoSuchElementException;
 
-public class Stack<T> {
+public class OurStack<T> {
 	
 	private static final int DEFAULT_CAPACITY = 3;
 	
@@ -21,11 +21,11 @@ public class Stack<T> {
 		}	
 	}
 	
-	public Stack() {
+	public OurStack() {
 		super();
 	}
 
-	public Stack(int capacity) {
+	public OurStack(int capacity) {
 		super();
 		this.capacity = Math.max(capacity,  DEFAULT_CAPACITY);
 	}
@@ -47,8 +47,7 @@ public class Stack<T> {
 	
 	public boolean offer(T data) {
 		try {
-			add(data);
-			return true;
+			return add(data);
 		}catch (IllegalStateException e) {
 			return false;
 		}
