@@ -26,7 +26,7 @@ public class OurHashSet<T> implements Iterable<T>{
 		setInitialState();
 	}
 	
-	public OurHashSet(float loadFactor) {
+	public OurHashSet(double loadFactor) {
 		super();
 		this.loadFactor = loadFactor;
 		setInitialState();
