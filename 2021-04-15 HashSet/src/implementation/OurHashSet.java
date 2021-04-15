@@ -12,6 +12,7 @@ public class OurHashSet<T> implements Iterable<T>{
 
 	private int capacity = DEFAULT_CAPACITY;
 	private double loadFactor = DEFAULT_LOADFACTOR;
+	private int mask = capacity - 1;
 	private int size;
 	
 	public OurHashSet() {
@@ -40,7 +41,7 @@ public class OurHashSet<T> implements Iterable<T>{
 	}
 	
 	private ArrayList<T> getBucket(T data) {
-		return hashSet.get(data.hashCode() & capacity - 1);
+		return hashSet.get(data.hashCode() & mask);
 	}
 	
 	private void enlarge() {
@@ -58,6 +59,7 @@ public class OurHashSet<T> implements Iterable<T>{
 		}
 		
 		capacity = capacity << 1;
+		mask = capacity - 1;
 	}
 	
 	// methods
