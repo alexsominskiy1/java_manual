@@ -6,7 +6,7 @@ import implementation.OurHashSet;
 
 public class HashSetApp {
 
-	private static final int NUM_NUM = 15;
+	private static final int NUM_NUM = 20;
 	private static final int MAX_NUM = 1000;
 	static Random gen = new Random();
 	
