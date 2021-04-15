@@ -38,21 +38,21 @@ public class OurHashSet<T> implements Iterable<T>{
 		for (int i = 0; i < capacity; i++) hashSet.add(new ArrayList<T>());
 	}
 	
-	private ArrayList<T> getBucket(T data) {
+	private ArrayList<T> getBasket(T data) {
 		return hashSet.get(data.hashCode() & mask);
 	}
 	
 	private void enlarge() {
 		
-		ArrayList<T> bucket;
+		ArrayList<T> basket;
 		ArrayList<T> newBucket;
 		
 		for (int i = 0; i < capacity; i++) {
-			bucket = hashSet.get(i);
+			basket = hashSet.get(i);
 			newBucket = new ArrayList<T>();
 			hashSet.add(newBucket);
-			for (int j = 0; j < bucket.size(); j++) {
-				if ((bucket.get(j).hashCode() & 1) != 0) newBucket.add(bucket.remove(j));
+			for (int j = 0; j < basket.size(); j++) {
+				if ((basket.get(j).hashCode() & 1) != 0) newBucket.add(basket.remove(j));
 			}
 		}
 		
@@ -66,9 +66,9 @@ public class OurHashSet<T> implements Iterable<T>{
 		
 		if (data == null) return false;
 		
-		ArrayList<T> bucket = getBucket(data);
-		if (!bucket.contains(data)) {
-			bucket.add(data);	
+		ArrayList<T> basket = getBasket(data);
+		if (!basket.contains(data)) {
+			basket.add(data);	
 			if (loadFactor*capacity < ++size) enlarge();
 			return true;
 		}
@@ -77,12 +77,12 @@ public class OurHashSet<T> implements Iterable<T>{
 	
 	public boolean contains(T data) {
 		if (data == null) return false;
-		return getBucket(data).contains(data);
+		return getBasket(data).contains(data);
 	}
 	
 	public boolean remove(T data) {
 		if (data == null) return false;
-		boolean result = getBucket(data).remove(data);
+		boolean result = getBasket(data).remove(data);
 		if (result) size--;
 		return result;
 	}
