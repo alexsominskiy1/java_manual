@@ -35,9 +35,7 @@ public class OurHashSet<T> implements Iterable<T>{
 	// utilities
 	
 	private void setInitialState() {
-		if (!hashSet.isEmpty()) hashSet.clear();
 		for (int i = 0; i < capacity; i++) hashSet.add(new ArrayList<T>());
-		size = 0;
 	}
 	
 	private ArrayList<T> getBucket(T data) {
