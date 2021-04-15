@@ -13,7 +13,7 @@ public class OurHashSet<T> implements Iterable<T>{
 	private int capacity = DEFAULT_CAPACITY;
 	private double loadFactor = DEFAULT_LOADFACTOR;
 	private int mask = capacity - 1;
-	private int size;
+	private int size = 0;
 	
 	public OurHashSet() {
 		super();
@@ -37,7 +37,7 @@ public class OurHashSet<T> implements Iterable<T>{
 	private void setInitialState() {
 		if (!hashSet.isEmpty()) hashSet.clear();
 		for (int i = 0; i < capacity; i++) hashSet.add(new ArrayList<T>());
-		size++;
+		size = 0;
 	}
 	
 	private ArrayList<T> getBucket(T data) {
