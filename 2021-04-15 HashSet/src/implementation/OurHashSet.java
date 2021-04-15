@@ -52,7 +52,7 @@ public class OurHashSet<T> implements Iterable<T>{
 			newBasket = new ArrayList<T>();
 			hashSet.add(newBasket);
 			for (int j = 0; j < basket.size(); j++) {
-				if ((basket.get(j).hashCode() & 1) != 0) newBasket.add(basket.remove(j));
+				if ((basket.get(j).hashCode() & 1) == 0) newBasket.add(basket.remove(j));
 			}
 		}
 		
