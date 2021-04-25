@@ -138,9 +138,7 @@ public class Library {
 	
 	public Iterable<Book> getBookByPublisherCountry(String country){
 		TreeSet<Publisher> publishers = getPublishers();
-		System.out.println(publishers);
 		publishers.removeIf(publisher -> !publisher.getCountry().equals(country));
-		System.out.println(publishers);
 		return publisherMap.getByKeys(publishers);
 	}
 	
