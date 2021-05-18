@@ -22,7 +22,6 @@ public class ConsumerApp {
 	public static void main(String[] args) {
 		
 		List<String> names = Arrays.asList("john", "robert", "mary", "jenny");
-		
 		toTitleCase.andThen(outputList).accept(names);	
 	}
 }
