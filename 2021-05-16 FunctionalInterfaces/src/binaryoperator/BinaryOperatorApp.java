@@ -6,7 +6,7 @@ import java.util.function.BinaryOperator;
 public class BinaryOperatorApp {
 	
 	static BinaryOperator<TreeSet<Integer>> joinTrees = (tree1, tree2) -> {
-		TreeSet<Integer> result = new TreeSet();
+		TreeSet<Integer> result = new TreeSet<>();
 		result.addAll(tree1);
 		result.addAll(tree2);
 		return result;
