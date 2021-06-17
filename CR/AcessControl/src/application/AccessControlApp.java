@@ -23,13 +23,16 @@ public class AccessControlApp {
 		// private
 		
 		Field privateField = fooClass.getDeclaredField("privateField");
+		Field anotherPrivateField = fooClass.getDeclaredField("privateField");
 		privateField.setAccessible(true);										
-		privateField.setInt(foo, 7);
+		privateField.setInt(foo, 7);					//privateField open
+		//anotherPrivateField.setInt(foo, 9);			//anotherPrivateField NOT open
 		System.out.println(foo);
 		
 		Method privateMethod = fooClass.getDeclaredMethod("privateMethod");
 		privateMethod.setAccessible(true);
 		privateMethod.invoke(foo);
+
 	}
 
 }
