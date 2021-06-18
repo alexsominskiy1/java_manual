@@ -12,13 +12,11 @@ public class MethodApp {
 		
 		Class<Child> clazz = Child.class;
 		
-		System.out.println("--Declared--");
-		
+		System.out.println("--Declared--");	
 		Method[] declared = clazz.getDeclaredMethods();
 		for (Method method : declared)System.out.println(method);
 		
 		System.out.println("--Own--");
-		
 		Method[] own = clazz.getMethods();
 		for (Method method : own)System.out.println(method);
 		
@@ -46,7 +44,6 @@ public class MethodApp {
 		
 		Child child = new Child();
 	
-		
 		Method parentStatic = Child.class.getMethod("parentStaticMethod", int.class, String.class);
 		parentStatic.invoke(null, 33, "another string");
 		
