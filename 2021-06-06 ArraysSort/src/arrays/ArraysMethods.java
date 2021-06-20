@@ -25,10 +25,10 @@ public class ArraysMethods {
 		return ~right;
 	}
 	
-	public static <T> int mismatch(T[] arr1, T[] arr2) {
+	public static <T extends Comparable<? super T>> int mismatch(T[] arr1, T[] arr2) {
 		int minLen = Integer.min(arr1.length, arr2.length);
 		for (int i = 0; i < minLen; i++) {
-			if (!arr1[i].equals(arr2[i])) return i;
+			if (arr1[i].compareTo(arr2[i]) != 0) return i;
 		}
 		return -1;
 	}
@@ -38,8 +38,8 @@ public class ArraysMethods {
 		return mismatch < 0 ? arr1.length - arr2.length : arr1[mismatch].compareTo(arr2[mismatch]);
 	}
 	
-	public static <T> boolean equals(T[] arr1, T[] arr2) {
-		return mismatch(arr1, arr2) < 0 && arr1.length == arr2.length;
+	public static <T  extends Comparable<? super T>> boolean equals(T[] arr1, T[] arr2) {
+		return compare(arr1, arr2) == 0;
 	}
 
 }
