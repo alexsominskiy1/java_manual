@@ -43,7 +43,7 @@ public class ArraysSort {
 	
 	
 	public static void quickSort(int[] arr, int start, int end) {
-		if (start < end)
+		if (start <= end)
 	    {
 	        int[] partitions = dutchFlagPartition(arr, start, end);
 	        quickSort(arr, start, partitions[0] - 1);
