@@ -1,17 +1,12 @@
 package application;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.IntFunction;
 import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
 import java.util.function.IntUnaryOperator;
-import java.util.function.Supplier;
 
 public class RandomArrayLib {
-	
-	
 	
 	public static int[] randomIntArray(int size, int bound) {
 		return randomIntArray(size, 0, bound);

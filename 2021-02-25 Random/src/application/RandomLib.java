@@ -16,7 +16,7 @@ public class RandomLib {
 		if (!start.isBefore(end)) throw new RandomLibException(
 				"randomLocalDate: Start not before end. start: " + start + "; end: " + end
 															);
-		return start.plusDays(ThreadLocalRandom.current().nextLong(end.toEpochDay() - start.toEpochDay()));
+		return LocalDate.ofEpochDay(ThreadLocalRandom.current().nextLong(end.toEpochDay(),start.toEpochDay()));
 	}
 	
 	public static String randomString(int len) {

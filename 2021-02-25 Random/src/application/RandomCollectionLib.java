@@ -18,9 +18,9 @@ public class RandomCollectionLib {
 		return randomSet(size, supplier, Integer.MAX_VALUE);
 	}
 	
-	public static <T> Set<T> randomSet(int size, Supplier<T> supplier, int maxDistinctInstancesNumber){
+	public static <T> Set<T> randomSet(int size, Supplier<T> supplier, int distinctInstancesNumber){
 		HashSet<T> hashSet = new HashSet<>();
-		for (int i=0; hashSet.size() < size && i < maxDistinctInstancesNumber; i++)hashSet.add(supplier.get());
+		for (int i=0; hashSet.size() < size && i < distinctInstancesNumber; i++)hashSet.add(supplier.get());
 		return hashSet;
 	}
 	
