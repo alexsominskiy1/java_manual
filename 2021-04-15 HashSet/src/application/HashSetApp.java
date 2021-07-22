@@ -29,6 +29,9 @@ public class HashSetApp {
 		System.out.println();
 			
 		hashSet.display();
+		
+		for (Integer i : hashSet)System.out.print(i + "  ");
+		System.out.println();
 	}
 
 }
